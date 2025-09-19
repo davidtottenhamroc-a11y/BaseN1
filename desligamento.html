@@ -86,7 +86,7 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
-            display: none; /* Hidden by default */
+            display: none;
         }
         .result-title {
             margin: 0 0 15px;
@@ -181,28 +181,23 @@
                 return;
             }
 
-            // Verificação de divergência entre minutos e situação
-            if (situacao === 'sqlexception' && (minutos <= 5 || minutos > 10)) {
-                resultadoDiv.innerHTML = `<div class="error-message"><strong>Dados Divergentes:</strong> A situação "SQLException (5-10 min)" foi selecionada, mas a minutagem inserida (${minutos} min) está fora desse intervalo. Por favor, ajuste os valores.</div>`;
+            // Lógica de validação cruzada entre minutos e situação
+            if (situacao === 'sqlexception' && (minutos < 5 || minutos > 10)) {
+                resultadoDiv.innerHTML = `<div class="error-message"><strong>Dados Divergentes:</strong> A situação "SQLException (5-10 min)" foi selecionada, mas a minutagem inserida (${minutos} min) não corresponde a esse intervalo. Por favor, ajuste os valores.</div>`;
                 return;
             }
-
             if ((situacao === 'um_segmento' || situacao === 'sem_imagens' || situacao === 'dois_segmentos') && minutos <= 10) {
                 resultadoDiv.innerHTML = `<div class="error-message"><strong>Dados Divergentes:</strong> Uma situação de desligamento superior a 10 minutos foi selecionada, mas a minutagem inserida foi de ${minutos} min. Por favor, corrija os dados.</div>`;
                 return;
             }
-
-             if (situacao === 'padrao' && minutos > 5) {
-                 const isRange5to10 = minutos > 5 && minutos <= 10;
-                 const isRangeOver10 = minutos > 10;
-
-                 if (isRange5to10 || isRangeOver10) {
-                      resultadoDiv.innerHTML = `<div class="error-message"><strong>Atenção:</strong> Para desligamentos de ${minutos} minutos, é recomendado selecionar uma "Situação Específica" para obter um diagnóstico mais preciso.</div>`;
-                      return; // Opcional: pode remover este 'return' se quiser permitir a simulação mesmo assim.
-                 }
+            if (situacao === 'padrao' && minutos > 5) {
+                const hasSpecificCase = situacao === 'sqlexception' || situacao === 'um_segmento' || situacao === 'sem_imagens' || situacao === 'dois_segmentos';
+                if (!hasSpecificCase) {
+                    resultadoDiv.innerHTML = `<div class="error-message"><strong>Atenção:</strong> Para desligamentos de ${minutos} minutos, é recomendado selecionar uma "Situação Específica" para obter um diagnóstico mais preciso.</div>`;
+                    return;
+                }
             }
-
-
+            
             simularAnalise(minutos, situacao, resultadoDiv);
         }
 
