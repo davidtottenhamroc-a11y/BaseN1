@@ -86,9 +86,15 @@
 
         .flowchart {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .flowchart {
+                grid-template-columns: 1fr;
+            }
         }
 
         .column {
@@ -189,10 +195,10 @@
                                 <div class="step-number">1</div>
                                 <div class="step-title">Funcionamento da Câmera</div>
                                 <div class="step-content">
-                                    <p>Confirmar se a câmera está funcionando na máquina do cliente, acessando suas imagens pelo IP estático (**192.168.00.0**).</p>
+                                    <p>Confirmar se a câmera está funcionando na máquina do cliente, acessando suas imagens pelo IP estático (<strong>192.168.00.0</strong>).</p>
                                     <div class="step step-warning">
                                         <div class="step-content">
-                                            <strong>Atenção:</strong> Se o CFC usar um IP público, **não prossiga** com a instalação e o cadastro.
+                                            <strong>Atenção:</strong> Se o CFC usar um IP público, <strong>não prossiga</strong> com a instalação e o cadastro.
                                         </div>
                                     </div>
                                 </div>
@@ -218,14 +224,14 @@
                                 <div class="step-number">1</div>
                                 <div class="step-title">Download dos Arquivos</div>
                                 <div class="step-content">
-                                    <p>Faça o download dos arquivos **.Net 6.0** e **Capturador Capturado**.</p>
+                                    <p>Faça o download dos arquivos <strong>.Net 6.0</strong> e <strong>Capturador Capturado</strong>.</p>
                                 </div>
                             </div>
                             <div class="step step-install">
                                 <div class="step-number">2</div>
                                 <div class="step-title">Instalação do .NET 6.0</div>
                                 <div class="step-content">
-                                    <p>Instale primeiro o **.NET 6.0** e aguarde a conclusão. Clique em "Fechar".</p>
+                                    <p>Instale primeiro o <strong>.NET 6.0</strong> e aguarde a conclusão. Clique em "Fechar".</p>
                                 </div>
                             </div>
                         </div>
@@ -234,7 +240,7 @@
                                 <div class="step-number">3</div>
                                 <div class="step-title">Extração e Execução do Setup</div>
                                 <div class="step-content">
-                                    <p>Extraia os arquivos e execute **"Setup Aplicativo"**.</p>
+                                    <p>Extraia os arquivos e execute <strong>"Setup Aplicativo"</strong>.</p>
                                     <div class="step step-warning">
                                         <div class="step-content">
                                             <strong>Aviso:</strong> Se o Windows bloquear, clique em "Mais informações" e "Executar assim mesmo".
@@ -246,7 +252,7 @@
                                 <div class="step-number">4</div>
                                 <div class="step-title">Conclusão</div>
                                 <div class="step-content">
-                                    <p>Clique em **"Avançar"** 3 vezes, aguarde e, ao final, clique em "Fechar".</p>
+                                    <p>Clique em <strong>"Avançar"</strong> 3 vezes, aguarde e, ao final, clique em "Fechar".</p>
                                 </div>
                             </div>
                         </div>
@@ -260,14 +266,14 @@
                                 <div class="step-number">1</div>
                                 <div class="step-title">Acesso ao Arquivo de Configuração</div>
                                 <div class="step-content">
-                                    <p>Acesse o arquivo **"config.json"** no caminho: **C:\\Vsoft\\exame-capturador\\Config**.</p>
+                                    <p>Acesse o arquivo <strong>"config.json"</strong> no caminho: <strong>C:\\Vsoft\\exame-capturador\\Config</strong>.</p>
                                 </div>
                             </div>
                             <div class="step step-config">
                                 <div class="step-number">2</div>
                                 <div class="step-title">Configuração do INSTANCEID</div>
                                 <div class="step-content">
-                                    <p>Adicione o **INSTANCEID** no campo "instanceId" no arquivo e salve.</p>
+                                    <p>Adicione o <strong>INSTANCEID</strong> no campo "instanceId" no arquivo e salve.</p>
                                     <div class="step step-warning">
                                         <div class="step-content">
                                             <strong>Onde encontrar?</strong> No painel Gestor do Exame Teórico > Capturador > Instância do Capturador.
@@ -281,14 +287,14 @@
                                 <div class="step-number">3</div>
                                 <div class="step-title">Início dos Serviços</div>
                                 <div class="step-content">
-                                    <p>Na barra de pesquisa do Windows, procure por "Serviços" e inicie **"Capturador-Wsvc"** e **"CaptureService_1"**.</p>
+                                    <p>Na barra de pesquisa do Windows, procure por "Serviços" e inicie <strong>"Capturador-Wsvc"</strong> e <strong>"CaptureService_1"</strong>.</p>
                                 </div>
                             </div>
                             <div class="step step-config">
                                 <div class="step-number">4</div>
                                 <div class="step-title">Verificação de Log e Imagens</div>
                                 <div class="step-content">
-                                    <p></p>
+                                    <p>Confirme o funcionamento verificando se um log é gerado em <strong>C:\\Vsoft\\exame-capturador\\log</strong> e se uma imagem é salva em <strong>C:\\Vsoft\\exame-capturador\\image</strong> a cada 5 segundos.</p>
                                 </div>
                             </div>
                         </div>
