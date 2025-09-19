@@ -3,33 +3,19 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve os arquivos estáticos (HTML, CSS, JS) da pasta atual
-app.use(express.static(__dirname));
+// Configura o Express para servir todos os arquivos estáticos
+// do diretório onde o server.js está localizado.
+// Isso inclui todos os seus arquivos HTML, CSS e JS.
+app.use(express.static(path.join(__dirname, '/')));
 
-// Rota principal para a página inicial (menu.html)
+// A rota principal (/) serve o arquivo menu.html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'menu.html'));
 });
 
-// Rota para cada arquivo HTML
-app.get('/guia_atendimento', (req, res) => {
-    res.sendFile(path.join(__dirname, 'guia_atendimento.html'));
-});
-
-app.get('/desligamento', (req, res) => {
-    res.sendFile(path.join(__dirname, 'desligamento.html'));
-});
-
-app.get('/abertura', (req, res) => {
-    res.sendFile(path.join(__dirname, 'abertura.html'));
-});
-
-app.get('/troca_de_placa', (req, res) => {
-    res.sendFile(path.join(__dirname, 'troca_de_placa.html'));
-});
-
-app.get('/capiturador', (req, res) => {
-    res.sendFile(path.join(__dirname, 'capiturador.html'));
+// A rota Catch-all para lidar com 404s, caso a rota não exista
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
 // Iniciar o servidor
