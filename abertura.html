@@ -476,15 +476,19 @@
 
     <script>
         const steps = document.querySelectorAll('.step');
+        let currentAnimation = null;
 
         function resetSimulation() {
             steps.forEach(step => {
                 step.classList.remove('active-path', 'inactive-path', 'highlighted');
                 step.style.animation = "none";
             });
+            if (currentAnimation) {
+                clearTimeout(currentAnimation);
+            }
         }
         
-        function highlightSteps(path) {
+        function highlightSteps(path, finalStepId) {
             resetSimulation();
             steps.forEach(step => {
                 const stepNumber = parseInt(step.id.split('-')[1]);
@@ -494,6 +498,9 @@
                     step.classList.add('inactive-path');
                 }
             });
+            if (finalStepId) {
+                document.getElementById(finalStepId).style.animation = "pulse 1.5s infinite";
+            }
         }
 
         function simulateProcess() {
@@ -504,7 +511,7 @@
             fullPath.forEach((stepNumber, index) => {
                 const step = document.getElementById(`step-${stepNumber}`);
                 if (step) {
-                    setTimeout(() => {
+                    currentAnimation = setTimeout(() => {
                         step.classList.add('highlighted');
                         if (index > 0) {
                             const prevStep = document.getElementById(`step-${fullPath[index - 1]}`);
@@ -521,32 +528,27 @@
         
         function simulateSuccess() {
             const successPath = [1, 2, 3, 5, 7, 8, 10, 11, 12];
-            highlightSteps(successPath);
-            document.getElementById('step-12').style.animation = "pulse 1.5s infinite";
+            highlightSteps(successPath, 'step-12');
         }
 
         function simulateDataError() {
             const errorPath = [1, 2, 3, 4];
-            highlightSteps(errorPath);
-            document.getElementById('step-4').style.animation = "pulse 1.5s infinite";
+            highlightSteps(errorPath, 'step-4');
         }
 
         function simulateBiometryError() {
             const errorPath = [1, 2, 3, 5, 6];
-            highlightSteps(errorPath);
-            document.getElementById('step-6').style.animation = "pulse 1.5s infinite";
+            highlightSteps(errorPath, 'step-6');
         }
         
         function simulateGPSFailure() {
             const errorPath = [1, 2, 3, 5, 7, 8];
-            highlightSteps(errorPath);
-            document.getElementById('step-8').style.animation = "pulse 1.5s infinite";
+            highlightSteps(errorPath, 'step-8');
         }
         
         function simulateSchedulingError() {
             const errorPath = [1, 2, 3, 5, 7, 9];
-            highlightSteps(errorPath);
-            document.getElementById('step-9').style.animation = "pulse 1.5s infinite";
+            highlightSteps(errorPath, 'step-9');
         }
     </script>
 </body>
