@@ -228,7 +228,6 @@
             let titulo = document.querySelector(`#cenario-atendimento option[value="${cenario}"]`).textContent;
 
             switch (cenario) {
-                // ... [Casos anteriores permanecem os mesmos] ...
                  case 'aluno_sem_credito':
                     conteudoHtml = `
                         <div class="step">
@@ -530,7 +529,6 @@
             resultadoDiv.style.display = 'block';
         }
 
-        // Inicializa as sub-opções ao carregar a página
         document.addEventListener('DOMContentLoaded', mostrarSubOpcoes);
     </script>
 
